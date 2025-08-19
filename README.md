@@ -1,1 +1,1 @@
-# BinIquserapp project
+# BinIq-StoreApp
