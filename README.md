@@ -1,1 +1,1 @@
-# BinIquserapp
+# BinIquserapp project
