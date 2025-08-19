@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -7,125 +7,119 @@ import {
   Dimensions,
   TouchableOpacity,
   StatusBar,
-} from "react-native";
+} from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
-} from "react-native-responsive-screen";
-import Carousel, { Pagination } from "react-native-snap-carousel";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import ObImg5 from "../../../assets/ob_img5.svg";
-import Onboarding1 from "../../../assets/onboarding_1.svg";
-import Onboarding2 from "../../../assets/onboarding_2.svg";
-import Onboarding3 from "../../../assets/onboarding_3.svg";
-import Onboarding4 from "../../../assets/onboarding_4.svg";
+} from 'react-native-responsive-screen';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import ObImg5 from '../../../assets/ob_img5.svg';
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get('window');
 
 const onboardingData = [
+  // {
+  //   title: (<Text>Largest Network of{' '}<Text style={{ color: '#00B386', textDecorationLine: 'underline', }}>Amazon Bin Store</Text> in the Nation!</Text>),
+  //   subtitle: "Discover hidden gems near you.",
+  //   image: require('../../../assets/ob_img1.gif'),
+  //   styles: { width: wp(80), height: hp(37) }
+  // },
   {
     title: (
       <Text>
-        Create and Manage{" "}
-        <Text style={{ color: "#00B386", textDecorationLine: "underline" }}>
-          Promotions!
-        </Text>
+        Largest Network of{' '}
+        <Text style={{color: '#00B386', textDecorationLine: 'underline'}}>
+          Amazon Bin Store
+        </Text>{' '}
+        in the Nation!
       </Text>
     ),
-    subtitle: (
-      <Text
-        style={{
-          color: "#524B6B",
-          fontFamily: "DMSans_18pt-Regular",
-          fontSize: wp(3.8),
-        }}
-      >
-        Keep your customers engaged with time-limited offers and discounts.
-      </Text>
-    ),
-    image: <Onboarding1 />,
-    styles: { width: wp(80), height: hp(37) },
+    subtitle: 'Discover hidden gems near you.',
+    image: require('../../../assets/ob_img_5.png'),
+    styles: {width: wp(80), height: hp(37)},
   },
   {
     title: (
       <Text>
-        Discover Trusted{" "}
-        <Text style={{ color: "#00B386", textDecorationLine: "underline" }}>
-          Suppliers
+        Select Your{' '}
+        <Text style={{color: '#00B386', textDecorationLine: 'underline'}}>
+          Course!
         </Text>
       </Text>
     ),
     subtitle: (
       <Text
         style={{
-          color: "#524B6B",
-          fontFamily: "DMSans_18pt-Regular",
+          color: '#524B6B',
+          fontFamily: 'DMSans_18pt-Regular',
           fontSize: wp(3.8),
-        }}
-      >
-        Source products quickly and easily from over 100 suppliers.
+        }}>
+        Discover hidden gems near you.
       </Text>
     ),
-    image: <Onboarding2 width={"97%"} />,
-    styles: { width: wp(82), height: hp(35) },
+    image: require('../../../assets/ob_img2.png'), // Add your image path
+    styles: {width: wp(82), height: hp(35)},
   },
   {
     title: (
       <Text>
-        Showcase{" "}
-        <Text style={{ color: "#00B386", textDecorationLine: "underline" }}>
-          Your Store!
+        Streamline your{' '}
+        <Text style={{color: '#00B386', textDecorationLine: 'underline'}}>
+          Process!
         </Text>
       </Text>
     ),
     subtitle: (
       <Text
         style={{
-          color: "#524B6B",
-          fontFamily: "DMSans_18pt-Regular",
+          color: '#524B6B',
+          fontFamily: 'DMSans_18pt-Regular',
           fontSize: wp(3.8),
-        }}
-      >
-        Show weekly arrivals, deals and connect with your customers.{" "}
+        }}>
+        Discover hidden gems near you.
       </Text>
     ),
-    image: <Onboarding3 width={"99%"} />, // Add your image path
-    styles: { width: wp(80), height: hp(35) },
+    image: require('../../../assets/ob_img3.png'), // Add your image path
+    styles: {width: wp(80), height: hp(35)},
   },
   {
     title: (
       <Text>
-        Nationwide{" "}
-        <Text style={{ color: "#00B386", textDecorationLine: "underline" }}>
-          Bin Shopper & Reseller Network
+        Secure your{' '}
+        <Text style={{color: '#00B386', textDecorationLine: 'underline'}}>
+          Scans!
         </Text>
       </Text>
     ),
     subtitle: (
       <Text
         style={{
-          color: "#524B6B",
-          fontFamily: "DMSans_18pt-Regular",
+          color: '#524B6B',
+          fontFamily: 'DMSans_18pt-Regular',
           fontSize: wp(3.8),
-        }}
-      >
-        Upload photos, videos, and more to highlight your trending products and
-        promotions.
+        }}>
+        Discover hidden gems near you.
       </Text>
     ),
-    image: <Onboarding4 width={"95%"} />, // Add your image path
-    styles: { width: wp(90), height: hp(37) },
+    image: require('../../../assets/ob_img4.png'), // Add your image path
+    styles: {width: wp(90), height: hp(37)},
   },
 ];
 
-const OnboardingScreen = ({ navigation }) => {
+const OnboardingScreen = ({navigation}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
 
-  const renderItem = ({ item }) => (
-    <View style={{ ...styles.slide }}>
-      {item.image}
-      <View style={{ width: "90%" }}>
+  const renderItem = ({item}) => (
+    <View style={{...styles.slide}}>
+      <Image
+        source={item.image}
+        style={{...item.styles}}
+        resizeMode="contain"
+        animated={true}
+      />
+      <View style={{width: '90%'}}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.subtitle}>{item.subtitle}</Text>
       </View>
@@ -141,7 +135,7 @@ const OnboardingScreen = ({ navigation }) => {
           width: wp(8),
           height: hp(1.1),
           borderRadius: 5,
-          backgroundColor: "#14BA9C",
+          backgroundColor: '#14BA9C',
           marginHorizontal: wp(-1.1), // Adjust spacing between dots
         }}
         inactiveDotStyle={{
@@ -158,7 +152,7 @@ const OnboardingScreen = ({ navigation }) => {
     if (activeIndex < onboardingData.length - 1) {
       carouselRef.current.snapToNext();
     } else {
-      navigation.replace("SignUp"); // Change 'HomeScreen' to your main screen
+      navigation.replace('SignUp'); // Change 'HomeScreen' to your main screen
     }
   };
 
@@ -173,7 +167,7 @@ const OnboardingScreen = ({ navigation }) => {
       <StatusBar translucent={true} backgroundColor="transparent" />
       <View style={styles.logoHeader}>
         <Image
-          source={require("../../../assets/logo.png")}
+          source={require('../../../assets/logo.png')}
           style={styles.logo}
         />
       </View>
@@ -183,7 +177,7 @@ const OnboardingScreen = ({ navigation }) => {
         renderItem={renderItem}
         sliderWidth={width}
         itemWidth={width}
-        onSnapToItem={(index) => setActiveIndex(index)}
+        onSnapToItem={index => setActiveIndex(index)}
         decelerationRate="fast"
         snapToInterval={width} // Ensures snapping to one item
       />
@@ -202,15 +196,13 @@ const OnboardingScreen = ({ navigation }) => {
         {activeIndex === onboardingData.length - 1 && (
           <TouchableOpacity
             style={styles.gettingStarted}
-            onPress={() => navigation.navigate("SignUp")}
-          >
+            onPress={() => navigation.navigate('SelectPlan')}>
             <Text
               style={{
-                fontFamily: "Nunito-SemiBold",
-                color: "#fff",
+                fontFamily: 'Nunito-SemiBold',
+                color: '#fff',
                 fontSize: hp(2.5),
-              }}
-            >
+              }}>
               Get started
             </Text>
           </TouchableOpacity>
@@ -223,15 +215,15 @@ const OnboardingScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   slide: {
     marginTop: hp(5),
     height: hp(70),
     // flex: 2,
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    paddingHorizontal: "3%",
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingHorizontal: '3%',
   },
   image: {
     width: wp(80),
@@ -239,40 +231,40 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: hp(4.2),
-    fontWeight: "bold",
-    color: "#000",
-    textAlign: "left",
+    fontWeight: 'bold',
+    color: '#000',
+    textAlign: 'left',
     marginBottom: 10,
   },
   subtitle: {
     fontSize: hp(2.1),
-    color: "#666",
-    textAlign: "left",
+    color: '#666',
+    textAlign: 'left',
   },
   arrowContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: "5%",
-    width: "100%",
-    bottom: "7%",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: '5%',
+    width: '100%',
+    bottom: '7%',
   },
   getStartedButton: {
-    backgroundColor: "#000",
+    backgroundColor: '#000',
     padding: 15,
     borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   getStartedText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   logoHeader: {
-    alignItems: "flex-end",
-    paddingRight: "3%",
+    alignItems: 'flex-end',
+    paddingRight: '3%',
     height: hp(13),
-    width: "100%",
+    width: '100%',
   },
   logo: {
     marginTop: hp(7),
@@ -282,22 +274,22 @@ const styles = StyleSheet.create({
   nextButton: {
     width: wp(16),
     height: wp(16),
-    backgroundColor: "#130160",
+    backgroundColor: '#130160',
     borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   highlightedText: {
-    color: "#00B386",
-    textDecorationLine: "underline",
+    color: '#00B386',
+    textDecorationLine: 'underline',
   },
   gettingStarted: {
-    backgroundColor: "#130160",
-    width: "100%",
+    backgroundColor: '#130160',
+    width: '100%',
     height: hp(7.5),
     borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
